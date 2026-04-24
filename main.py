@@ -1,4 +1,29 @@
 
+import os
+
+FILE_NAME = "students.txt"
+
+
+
+def load_students():
+    students = []
+
+    if not os.path.exists(FILE_NAME):
+        return students
+
+    with open(FILE_NAME, "r") as file:
+        for line in file:
+            data = line.strip().split(",")
+            if len(data) == 4:
+                student = {
+                    "id": data[0],
+                    "name": data[1],
+                    "age": data[2],
+                    "course": data[3]
+                }
+                students.append(student)
+
+    return students
 
 
 def save_students(students):
