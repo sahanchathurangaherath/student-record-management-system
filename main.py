@@ -1,3 +1,140 @@
+
+
+
+def save_students(students):
+    with open(FILE_NAME, "w") as file:
+        for student in students:
+            file.write(
+                f"{student['id']},{student['name']},{student['age']},{student['course']}\n"
+            )
+
+
+def add_student(students):
+    print("\n--- Add Student ---")
+
+    student_id = input("Enter Student ID: ")
+
+    for student in students:
+        if student["id"] == student_id:
+            print("Student ID already exists!")
+            return
+
+    name = input("Enter Student Name: ")
+    age = input("Enter Student Age: ")
+    course = input("Enter Course: ")
+
+    student = {
+        "id": student_id,
+        "name": name,
+        "age": age,
+        "course": course
+    }
+
+    students.append(student)
+    save_students(students)
+
+    print("Student added successfully!")
+
+def add_student(students):
+    print("\n--- Add Student ---")
+
+    student_id = input("Enter Student ID: ")
+
+    for student in students:
+        if student["id"] == student_id:
+            print("Student ID already exists!")
+            return
+
+    name = input("Enter Student Name: ")
+    age = input("Enter Student Age: ")
+    course = input("Enter Course: ")
+
+    student = {
+        "id": student_id,
+        "name": name,
+        "age": age,
+        "course": course
+    }
+
+    students.append(student)
+    save_students(students)
+
+    print("Student added successfully!")
+
+
+def view_students(students):
+    print("\n--- All Students ---")
+
+    if not students:
+        print("No student records found.")
+        return
+
+    for student in students:
+        print("----------------------")
+        print("ID     :", student["id"])
+        print("Name   :", student["name"])
+        print("Age    :", student["age"])
+        print("Course :", student["course"])
+
+
+def search_student(students):
+    print("\n--- Search Student ---")
+
+    search_value = input("Enter Student ID or Name: ").lower()
+
+    found = False
+
+    for student in students:
+        if student["id"].lower() == search_value or student["name"].lower() == search_value:
+            print("----------------------")
+            print("ID     :", student["id"])
+            print("Name   :", student["name"])
+            print("Age    :", student["age"])
+            print("Course :", student["course"])
+            found = True
+
+    if not found:
+        print("Student not found.")
+
+
+def update_student(students):
+    print("\n--- Update Student ---")
+
+    student_id = input("Enter Student ID to update: ")
+
+    for student in students:
+        if student["id"] == student_id:
+            print("Student found. Enter new details.")
+
+            student["name"] = input("Enter New Name: ")
+            student["age"] = input("Enter New Age: ")
+            student["course"] = input("Enter New Course: ")
+
+            save_students(students)
+            print("Student updated successfully!")
+            return
+
+    print("Student not found.")
+
+
+
+def delete_student(students):
+    print("\n--- Delete Student ---")
+
+    student_id = input("Enter Student ID to delete: ")
+
+    for student in students:
+        if student["id"] == student_id:
+            students.remove(student)
+            save_students(students)
+            print("Student deleted successfully!")
+            return
+
+    print("Student not found.")
+
+
+
+
 def main_menu():
     students = load_students()
 
